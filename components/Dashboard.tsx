@@ -17,6 +17,11 @@ export default function Dashboard({ username }: DashboardProps) {
     "daily",
   );
 
+  const bannerVariants = {
+    work: "bg-tt-light-red-work",
+    play: "bg-tt-soft-blue-play",
+  };
+
   return (
     <div className="text-white">
       <div className="relative h-10 w-10">
@@ -70,10 +75,12 @@ export default function Dashboard({ username }: DashboardProps) {
           const backgroundClass = bannerEntry
             ? bannerEntry.bg
             : "bg-tt-dark-blue";
+          const test = [item.title.toLowerCase()];
+          const testClass = `${test}-bg`;
 
           return (
             <div
-              className={cn("border-2 border-red-300", backgroundClass)}
+              className={cn("border-2 border-red-300", testClass)}
               key={index}
             >
               <h2>{item.title}</h2>

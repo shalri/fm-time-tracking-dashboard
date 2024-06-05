@@ -19,7 +19,7 @@ export const banner: { [key: string]: { title: string; bg: string } } = {
     title: "Social",
     bg: "bg-tt-violet-social",
   },
-  "self care": {
+  "self-care": {
     title: "Self Care",
     bg: "bg-tt-soft-orange-care",
   },

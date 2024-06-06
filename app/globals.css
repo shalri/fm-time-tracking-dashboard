@@ -3,22 +3,28 @@
 @tailwind utilities;
 
 .work-bg {
-  background: hsl(15, 100%, 70%) url(../public/images/icon-work.svg) no-repeat right top;
+  background: hsl(15, 100%, 70%) url(../public/images/icon-work.svg) no-repeat
+    right 18px top -11px;
 }
 .play-bg {
-  background: hsl(195, 74%, 62%);
+  background: hsl(195, 74%, 62%) url(../public/images/icon-play.svg) no-repeat
+    right 18px top -5px;
 }
 .study-bg {
-  background: hsl(348, 100%, 68%);
+  background: hsl(348, 100%, 68%) url(../public/images/icon-study.svg) no-repeat
+    right 18px top -6px;
 }
 .exercise-bg {
-  background: hsl(145, 58%, 55%);
+  background: hsl(145, 58%, 55%) url(../public/images/icon-exercise.svg)
+    no-repeat right 18px top -1px;
 }
 .social-bg {
-  background: hsl(264, 64%, 52%);
+  background: hsl(264, 64%, 52%) url(../public/images/icon-social.svg) no-repeat
+    right 18px top -16px;
 }
 .self-care-bg {
-  background: hsl(43, 84%, 65%);
+  background: hsl(43, 84%, 65%) url(../public/images/icon-self-care.svg)
+    no-repeat right 18px top -12px;
 }
 /* @layer components { */
 /*   .work-bg { */

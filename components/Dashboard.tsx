@@ -17,59 +17,64 @@ export default function Dashboard({ username }: DashboardProps) {
     "daily",
   );
 
-  const bannerVariants = {
-    work: "bg-tt-light-red-work",
-    play: "bg-tt-soft-blue-play",
-  };
-
   return (
     <div className="text-white">
-      <div className="relative h-10 w-10">
-        <Image
-          src={user?.image as string | StaticImport}
-          fill
-          loading="eager"
-          alt="user avatar"
-        />
-      </div>
-      <h1 className="text-3xl font-bold text-zinc-500">{user?.name}</h1>
-      <nav className="flex gap-2">
-        <div>
-          <button
-            className={cn(
-              "text-white/40",
-              timeframe === "daily" ? "text-white" : "",
-            )}
-            onClick={() => setTimeframe("daily")}
-          >
-            Daily
-          </button>
+      <section className="mb-6 overflow-hidden rounded-[1.10rem] bg-tt-dark-blue">
+        <div className="flex items-center justify-center gap-x-4 rounded-b-[1.10rem] bg-tt-blue px-[30px] py-[32px]">
+          <div className="relative h-[72px] w-[72px] rounded-full border-[3px] border-white">
+            <Image
+              src={user?.image as string | StaticImport}
+              fill
+              loading="eager"
+              alt="user avatar"
+            />
+          </div>
+          <div className="">
+            <p className="text-sm text-tt-pale-blue">Report for</p>
+            <h1 className="text-2xl font-semibold text-white/80">
+              {user?.name}
+            </h1>
+          </div>
         </div>
-        <div>
-          <button
-            className={cn(
-              "text-white/40",
-              timeframe === "weekly" ? "text-white" : "",
-            )}
-            onClick={() => setTimeframe("weekly")}
-          >
-            Weekly
-          </button>
-        </div>
-        <div>
-          <button
-            className={cn(
-              "text-white/40",
-              timeframe === "monthly" ? "text-white" : "",
-            )}
-            onClick={() => setTimeframe("monthly")}
-          >
-            Monthly
-          </button>
-        </div>
-      </nav>
+        <nav className="flex justify-between gap-2 bg-tt-dark-blue px-7 py-6">
+          <div>
+            <button
+              className={cn(
+                "text-white/40",
+                timeframe === "daily" ? "text-white" : "",
+              )}
+              onClick={() => setTimeframe("daily")}
+            >
+              Daily
+            </button>
+          </div>
+          <div>
+            <button
+              className={cn(
+                "text-white/40",
+                timeframe === "weekly" ? "text-white" : "",
+              )}
+              onClick={() => setTimeframe("weekly")}
+            >
+              Weekly
+            </button>
+          </div>
+          <div>
+            <button
+              className={cn(
+                "text-white/40",
+                timeframe === "monthly" ? "text-white" : "",
+              )}
+              onClick={() => setTimeframe("monthly")}
+            >
+              Monthly
+            </button>
+          </div>
+        </nav>
+      </section>
       {/* timetrackCard */}
-      <section className="grid gap-y-4">
+      <section className="grid gap-y-6">
+        {/* TODO: clean this up. Test code and ("safe-care") string manipulation */}
         {data.map((item, index) => {
           const bannerEntry = banner[item.title.toLowerCase()];
           const backgroundClass = bannerEntry
@@ -79,25 +84,34 @@ export default function Dashboard({ username }: DashboardProps) {
           const testClass = `${test}-bg`;
 
           return (
-            <div
-              className={cn("border-2 border-red-300", testClass)}
-              key={index}
-            >
-              <h2>{item.title}</h2>
-              <p>{item.timeframes[timeframe].current}hrs</p>
-              <p>Last Week - {item.timeframes[timeframe].previous}hrs</p>
-            </div>
+            <section key={index} className="overflow-hidden rounded-[1.1rem]">
+              {/* <div className={cn("-mt-[10px] px-4 pt-[48px]", testClass)}> */}
+              <div className={cn("rounded-b-[2rem] pt-[38px]", testClass)}>
+                <div className="rounded-t-[1.1rem] bg-tt-dark-blue px-6">
+                  <div className="flex items-center justify-between pt-7">
+                    <h2 className="font-bold">{item.title}</h2>
+                    <div className="relative h-[5px] w-[28px]">
+                      <Image
+                        src="./images/icon-ellipsis.svg"
+                        className="object-contain"
+                        alt="icon"
+                        fill
+                      />
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between pb-7">
+                    <p className="text-3xl font-normal">
+                      {item.timeframes[timeframe].current}hrs
+                    </p>
+                    <p className="text-sm text-tt-pale-blue">
+                      Last Week - {item.timeframes[timeframe].previous}hrs
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
           );
         })}
-
-        <div className={`${[data[0].title.toLowerCase()]}-bg`}>
-          {/* <div className="bg-tt-light-red-work"> */}
-          <div className={cn("border-2 border-red-300")}>
-            <h2>{data[0].title}</h2>
-            <p>{data[0].timeframes[timeframe].current}hrs</p>
-            <p>Last Week - {data[0].timeframes[timeframe].previous}hrs</p>
-          </div>
-        </div>
       </section>
     </div>
   );

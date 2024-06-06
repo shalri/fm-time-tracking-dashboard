@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${rubik.className} grid min-h-screen grid-cols-1 place-items-center bg-tt-very-dark-blue text-body`}
+        className={`${rubik.className} grid min-h-dvh grid-cols-1 place-items-center bg-tt-very-dark-blue text-body`}
       >
         {children}
       </body>

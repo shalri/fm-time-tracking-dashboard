@@ -18,10 +18,10 @@ export default function Dashboard({ username }: DashboardProps) {
   );
 
   return (
-    <div className="text-white">
-      <section className="mb-6 overflow-hidden rounded-[1.10rem] bg-tt-dark-blue">
-        <div className="flex items-center justify-center gap-x-4 rounded-b-[1.10rem] bg-tt-blue px-[30px] py-[32px]">
-          <div className="relative h-[70px] w-[70px] rounded-full border-[3px] border-white">
+    <div className="text-white sm:grid sm:max-w-[1112px] sm:grid-cols-4 sm:gap-8">
+      <section className="mb-6 overflow-hidden rounded-[1.10rem] bg-tt-dark-blue sm:mb-0 sm:flex sm:flex-col">
+        <div className="flex items-center justify-center gap-x-4 rounded-b-[1.10rem] bg-tt-blue px-[30px] py-[32px] sm:flex-grow sm:flex-col sm:items-start sm:justify-start sm:pb-0">
+          <div className="relative h-[70px] w-[70px] flex-shrink-0 rounded-full border-[3px] border-white sm:h-[86px] sm:w-[86px]">
             <Image
               src={user?.image as string | StaticImport}
               fill
@@ -30,13 +30,13 @@ export default function Dashboard({ username }: DashboardProps) {
             />
           </div>
           <div>
-            <p className="text-sm text-tt-pale-blue">Report for</p>
-            <h1 className="text-2xl font-semibold text-white/80">
+            <p className="text-sm text-tt-pale-blue sm:mt-11">Report for</p>
+            <h1 className="text-2xl font-semibold text-white/80 sm:text-[2.50rem] sm:font-normal sm:leading-[1.25]">
               {user?.name}
             </h1>
           </div>
         </div>
-        <nav className="flex justify-between gap-2 bg-tt-dark-blue px-7 pb-6 pt-5">
+        <nav className="flex justify-between gap-2 bg-tt-dark-blue px-7 pb-6 pt-5 sm:flex-col sm:gap-y-3 sm:pt-6">
           <div>
             <button
               className={cn(
@@ -73,7 +73,7 @@ export default function Dashboard({ username }: DashboardProps) {
         </nav>
       </section>
       {/* timetrackCard */}
-      <section className="grid gap-y-6">
+      <section className="grid gap-y-6 sm:col-span-3 sm:grid-cols-3 sm:place-content-center sm:gap-8">
         {/* TODO: clean this up. Test code and ("safe-care") string manipulation */}
         {data.map((item, index) => {
           const bannerEntry = banner[item.title.toLowerCase()];
@@ -88,11 +88,11 @@ export default function Dashboard({ username }: DashboardProps) {
               {/* <div className={cn("-mt-[10px] px-4 pt-[48px]", testClass)}> */}
               <div
                 className={cn(
-                  "cursor-pointer rounded-b-[2rem] pt-[36px]",
+                  "cursor-pointer rounded-b-[2rem] pt-[36px] sm:pt-[46px]",
                   testClass,
                 )}
               >
-                <div className="rounded-t-[1.1rem] bg-tt-dark-blue px-6 transition-all duration-300 hover:bg-[#34397b]">
+                <div className="rounded-t-[1.1rem] bg-tt-dark-blue px-6 transition-all duration-300 hover:bg-[#34397b] sm:px-7">
                   <div className="flex items-center justify-between pt-7">
                     <h2 className="font-bold">{item.title}</h2>
                     <div className="relative h-[5px] w-[28px] opacity-50 transition-all duration-200 hover:opacity-100">
@@ -104,8 +104,8 @@ export default function Dashboard({ username }: DashboardProps) {
                       />
                     </div>
                   </div>
-                  <div className="flex items-center justify-between pb-7">
-                    <p className="text-3xl font-normal">
+                  <div className="items-centerjustify-between flex pb-7 sm:flex-col  sm:items-start sm:pb-8">
+                    <p className="text-3xl font-normal sm:pb-6 sm:pt-10 sm:text-[3.5rem]">
                       {item.timeframes[timeframe].current}hrs
                     </p>
                     <p className="text-sm text-tt-pale-blue">

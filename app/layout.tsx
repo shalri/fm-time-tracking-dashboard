@@ -5,8 +5,9 @@ import "./globals.css";
 const rubik = Rubik({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "次に(tsugini) | FScode",
-  description: "A basic NextJS template for Frontend Mentor Challenges",
+  title: "Time Tracking Dashboard | FScode",
+  description:
+    "Solution for Time Tracking Dashboard challenge from Frontend Mentor",
 };
 
 export default function RootLayout({

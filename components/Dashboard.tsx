@@ -5,7 +5,7 @@ import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { banner } from "@/lib/banner";
+import CountUpAnimation from "./CountUpAnimation";
 
 interface DashboardProps {
   username: string;
@@ -16,6 +16,17 @@ export default function Dashboard({ username }: DashboardProps) {
   const [timeframe, setTimeframe] = useState<"daily" | "weekly" | "monthly">(
     "daily",
   );
+  const [fade, setFade] = useState(false);
+
+  const changeTimeframe = (newTimeframe: "daily" | "weekly" | "monthly") => {
+    if (timeframe !== newTimeframe) {
+      setFade(true);
+      setTimeout(() => {
+        setTimeframe(newTimeframe);
+        setFade(false);
+      }, 500);
+    }
+  };
 
   return (
     <div className="text-white sm:grid sm:max-w-[1112px] sm:grid-cols-4 sm:gap-8">
@@ -43,7 +54,7 @@ export default function Dashboard({ username }: DashboardProps) {
                 "text-white/40 transition-all duration-300 hover:text-white/80",
                 timeframe === "daily" ? "text-white" : "",
               )}
-              onClick={() => setTimeframe("daily")}
+              onClick={() => changeTimeframe("daily")}
             >
               Daily
             </button>
@@ -54,7 +65,7 @@ export default function Dashboard({ username }: DashboardProps) {
                 "text-white/40 transition-all duration-300 hover:text-white/80",
                 timeframe === "weekly" ? "text-white" : "",
               )}
-              onClick={() => setTimeframe("weekly")}
+              onClick={() => changeTimeframe("weekly")}
             >
               Weekly
             </button>
@@ -65,7 +76,7 @@ export default function Dashboard({ username }: DashboardProps) {
                 "text-white/40 transition-all duration-300 hover:text-white/80",
                 timeframe === "monthly" ? "text-white" : "",
               )}
-              onClick={() => setTimeframe("monthly")}
+              onClick={() => changeTimeframe("monthly")}
             >
               Monthly
             </button>
@@ -73,23 +84,17 @@ export default function Dashboard({ username }: DashboardProps) {
         </nav>
       </section>
       {/* timetrackCard */}
-      <section className="grid gap-y-6 sm:col-span-3 sm:grid-cols-3 sm:place-content-center sm:gap-8">
-        {/* TODO: clean this up. Test code and ("safe-care") string manipulation */}
+      <section className="grid gap-y-6 sm:col-span-3 sm:grid-cols-3 sm:place-content-center sm:gap-x-8 sm:gap-y-7">
         {data.map((item, index) => {
-          const bannerEntry = banner[item.title.toLowerCase()];
-          const backgroundClass = bannerEntry
-            ? bannerEntry.bg
-            : "bg-tt-dark-blue";
-          const test = [item.title.toLowerCase()];
-          const testClass = `${test}-bg`;
+          const activity = item.title.toLowerCase().replace(/\s+/g, "-");
+          const activityBgClass = `${activity}-bg`;
 
           return (
             <section key={index} className="overflow-hidden rounded-[1.1rem]">
-              {/* <div className={cn("-mt-[10px] px-4 pt-[48px]", testClass)}> */}
               <div
                 className={cn(
                   "cursor-pointer rounded-b-[2rem] pt-[36px] sm:pt-[46px]",
-                  testClass,
+                  activityBgClass,
                 )}
               >
                 <div className="rounded-t-[1.1rem] bg-tt-dark-blue px-6 transition-all duration-300 hover:bg-[#34397b] sm:px-7">
@@ -104,9 +109,19 @@ export default function Dashboard({ username }: DashboardProps) {
                       />
                     </div>
                   </div>
-                  <div className="items-centerjustify-between flex pb-7 sm:flex-col  sm:items-start sm:pb-8">
-                    <p className="text-3xl font-normal sm:pb-6 sm:pt-10 sm:text-[3.5rem]">
-                      {item.timeframes[timeframe].current}hrs
+                  <div
+                    className={cn(
+                      "flex items-center justify-between pb-7 sm:flex-col  sm:items-start sm:pb-8",
+                      fade ? "fadeIn" : "",
+                    )}
+                  >
+                    <p className="text-3xl font-normal sm:pb-6 sm:pt-9 sm:text-[3.5rem]">
+                      <span className="tabular-nums">
+                        <CountUpAnimation>
+                          {item.timeframes[timeframe].current}
+                        </CountUpAnimation>
+                      </span>
+                      hrs
                     </p>
                     <p className="text-sm text-tt-pale-blue">
                       Last Week - {item.timeframes[timeframe].previous}hrs

@@ -36,6 +36,7 @@ const config: Config = {
         bold: "500",
       },
       screens: {
+        sm: "880px",
         mobile: "375px",
         desktop: "1440px",
       },
